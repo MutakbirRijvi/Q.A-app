@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>পরীক্ষা অ্যাপ</title>
+
+  <!-- Bangla Font + EmailJS -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <script>
+    (function () {
+      emailjs.init("9onNzIvtNvItmnRfd"); // Replace with your EmailJS user ID
+    })();
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 600px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    #question {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    #options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    label:hover {
+      background: #e0e0e0;
+    }
+
+    input[type="radio"] {
+      accent-color: #007bff;
+    }
+
+    #timer {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: right;
+      color: #e63946;
+    }
+
+    .result {
+      text-align: center;
+      padding: 20px;
+      font-size: 1.4rem;
+      color: #155724;
+      background: #d4edda;
+      border-radius: 10px;
+    }
+
+    @media screen and (max-width: 500px) {
+      .container {
+        padding: 20px;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .navigation {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body style="font-family: 'Noto Sans Bengali', sans-serif;">
+  <div class="container">
+    <div id="nameInputSection">
+      <h3>পরীক্ষার্থীর নাম লিখুন:</h3>
+      <input type="text" id="examinerName" placeholder="আপনার নাম লিখুন">
+      <button onclick="saveName()">পরীক্ষা শুরু করুন</button>
+    </div>
+
+    <div id="quizSection" style="display:none;">
+      <div id="timer">২৫:০০</div>
+      <div id="question"></div>
+      <div id="options"></div>
+      <div class="navigation">
+        <button id="prevBtn" onclick="prevQuestion()">পূর্ববর্তী</button>
+        <button id="nextBtn" onclick="nextQuestion()">পরবর্তী</button>
+      </div>
+    </div>
+
+    <div class="result" style="display:none;">
+      <h2 id="score"></h2>
+    </div>
+  </div>
+
+  <script>
+    const quiz = [
+      {
+        question: 'বাংলাদেশের রাজধানী কোথায়?',
+        options: ['চট্টগ্রাম', 'খুলনা', 'ঢাকা', 'রাজশাহী'],
+        answer: 2
+      },
+      {
+        question: 'বাংলাদেশের স্বাধীনতা দিবস কবে?',
+        options: ['২১ ফেব্রুয়ারি', '২৬ মার্চ', '১৬ ডিসেম্বর', '১ জানুয়ারি'],
+        answer: 1
+      },
+      {
+        question: 'পদ্মা সেতু কোথায় অবস্থিত?',
+        options: ['ঢাকা', 'মুন্সিগঞ্জ ও শরীয়তপুর', 'চট্টগ্রাম', 'বরিশাল'],
+        answer: 1
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let timeRemaining = 25 * 60;
+    let timerInterval;
+    let selectedAnswers = new Array(quiz.length).fill(null);
+    let examinerName = "";
+
+    // Prevent retake logic
+    window.onload = function () {
+      const lastExamTime = localStorage.getItem("examCompletedTime");
+      if (lastExamTime) {
+        const elapsedTime = Date.now() - parseInt(lastExamTime, 10);
+        const oneHour = 2 * 60 * 1000;
+        if (elapsedTime < oneHour) {
+          document.querySelector(".container").innerHTML = `
+            <div class="result">
+              <h2>আপনি ইতোমধ্যে পরীক্ষাটি সম্পন্ন করেছেন।</h2>
+            </div>`;
+          return;
+        } else {
+          localStorage.removeItem("examCompleted");
+          localStorage.removeItem("examCompletedTime");
+        }
+      }
+    };
+
+    function saveName() {
+      const nameInput = document.getElementById('examinerName').value.trim();
+      if (nameInput === "") {
+        alert("অনুগ্রহ করে আপনার নাম লিখুন।");
+        return;
+      }
+
+      examinerName = nameInput;
+      document.getElementById('nameInputSection').style.display = 'none';
+      document.getElementById('quizSection').style.display = 'block';
+      showQuestion();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        submitExam();
+        return;
+      }
+
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      document.getElementById('timer').innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      timeRemaining--;
+    }
+
+    function showQuestion() {
+      const q = quiz[currentQuestion];
+      document.getElementById('question').innerText = `প্রশ্ন ${currentQuestion + 1}: ${q.question}`;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      q.options.forEach((opt, idx) => {
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="radio" name="option" value="${idx}" ${selectedAnswers[currentQuestion] === idx ? 'checked' : ''}> ${opt}`;
+        optionsDiv.appendChild(label);
+      });
+
+      document.getElementById('prevBtn').disabled = currentQuestion === 0;
+      document.getElementById('nextBtn').innerText = currentQuestion === quiz.length - 1 ? 'জমা দিন' : 'পরবর্তী';
+    }
+
+    function nextQuestion() {
+      const selectedOption = document.querySelector('input[name="option"]:checked');
+      if (selectedOption) {
+        selectedAnswers[currentQuestion] = parseInt(selectedOption.value);
+      }
+
+      if (currentQuestion === quiz.length - 1) {
+        submitExam();
+        return;
+      }
+
+      currentQuestion++;
+      showQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+      }
+    }
+
+    function submitExam() {
+      clearInterval(timerInterval);
+      score = selectedAnswers.reduce((acc, curr, idx) => curr === quiz[idx].answer ? acc + 1 : acc, 0);
+
+      document.querySelector('.result').style.display = 'flex';
+      document.getElementById('score').innerText = `${examinerName} - ফলাফল: ${score} / ${quiz.length}`;
+      document.querySelector('.navigation').style.display = 'none';
+      document.getElementById('question').style.display = 'none';
+      document.getElementById('options').style.display = 'none';
+
+      localStorage.setItem('examCompleted', true);
+      localStorage.setItem('examCompletedTime', Date.now().toString());
+
+      // Optional: Enable EmailJS
+      /*
+      emailjs.send("service_bqhs75j", "template_o3dw98v", {
+        name: examinerName,
+        score: `${score}/${quiz.length}`,
+        time: new Date().toLocaleString()
+      })
+      .then(() => {
+        alert('স্কোর সফলভাবে ইমেইল করা হয়েছে।');
+      }, (error) => {
+        alert('ইমেইল পাঠাতে ব্যর্থ হয়েছে।');
+        console.error('Email error:', error);
+      });
+      */
+    }
+  </script>
+</body>
+</html>
