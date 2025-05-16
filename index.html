@@ -167,23 +167,112 @@
   </div>
 
   <script>
-    const quiz = [
-      {
-        question: 'বাংলাদেশের রাজধানী কোথায়?',
-        options: ['চট্টগ্রাম', 'খুলনা', 'ঢাকা', 'রাজশাহী'],
-        answer: 2
-      },
-      {
-        question: 'বাংলাদেশের স্বাধীনতা দিবস কবে?',
-        options: ['২১ ফেব্রুয়ারি', '২৬ মার্চ', '১৬ ডিসেম্বর', '১ জানুয়ারি'],
-        answer: 1
-      },
-      {
-        question: 'পদ্মা সেতু কোথায় অবস্থিত?',
-        options: ['ঢাকা', 'মুন্সিগঞ্জ ও শরীয়তপুর', 'চট্টগ্রাম', 'বরিশাল'],
-        answer: 1
-      }
-    ];
+const quiz = [
+  {
+    number: 1,
+    question: '$\\int_0^p f\'(p) dp$ এর মান কোনটি?',
+    options: [
+      'ক. $\\frac{1}{2} f(p)$',
+      'খ. $\\frac{1}{3} f(p)$',
+      'গ. $f(p) - f(0)$',
+      'ঘ. $f(x) - f(0)$',
+    ],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 2,
+    question: '$y^2 = 16x$ এবং $y = 4x$ দ্বারা আবদ্ধ ক্ষেত্রের ক্ষেত্রফল কোনটি?',
+    options: [
+      'ক. $\\frac{1}{3}$ বর্গ একক',
+      'খ. $\\frac{2}{3}$ বর্গ একক',
+      'গ. $\\frac{1}{6}$ বর্গ একক',
+      'ঘ. $\\frac{1}{12}$ বর্গ একক',
+    ],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 3,
+    question: '$\\frac{d}{dx} e^{f(x)} = f\'(x) + c$ হলে $f(x) = ?$',
+    options: [
+      'ক. $\\sin(xe^x)$',
+      'খ. $\\tan(xe^x)$',
+      'গ. $\\cot(xe^x)$',
+      'ঘ. $\\sec(xe^x)$',
+    ],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 4,
+    question: '$\\int_0^{\\ln 2} \\frac{e^x}{x+1} dx$ এর মান কোনটি?',
+    options: [
+      'ক. $\\ln(2+1)$',
+      'খ. $\\frac{1}{2} \\ln 2$',
+      'গ. $\\infty$',
+      'ঘ. $0$',
+    ],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 5,
+    question: '$y = x$ এবং $y = x^3$ দ্বারা আবদ্ধ ক্ষেত্রের ক্ষেত্রফল (বর্গ এককে) কত?',
+    options: ['ক. $\\frac{5}{6}$', 'খ. $\\frac{1}{6}$', 'গ. $\\frac{1}{3}$', 'ঘ. $\\frac{2}{3}$'],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 6,
+    question: 'ধরা যাক $x$ এর জন্য $F\'(x) = \\int_1^x \\frac{\\ln t}{1+t} dt$ হলে $F\'\'(x) = ?$',
+    options: ['ক. $\\frac{1}{x}$', 'খ. $\\ln x$', 'গ. $x \\ln x$', 'ঘ. $x \\ln x - x$'],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 7,
+    question: '$y = -\\sqrt{a^2 - x^2}$ ও $y = 0$ দ্বারা আবদ্ধ ক্ষেত্রের ক্ষেত্রফল কোনটি?',
+    options: [
+      'ক. $\\frac{\\pi a^2}{4}$',
+      'খ. $\\frac{\\pi a^2}{2}$',
+      'গ. $\\pi a^2$',
+      'ঘ. $\\frac{3}{2} a^2$',
+    ],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 8,
+    question: '$y^2 = 4x$ এবং $y = x$ দ্বারা আবদ্ধ ক্ষেত্রের ক্ষেত্রফল —',
+    options: ['ক. $\\frac{2}{3}$', 'খ. $\\frac{4}{3}$', 'গ. $\\frac{8}{3}$', 'ঘ. $3$'],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 9,
+    question: '$\\int \\frac{dx}{x(1+\\ln x)}$ এর মান কত?',
+    options: ['ক. $\\frac{1}{4}$', 'খ. $\\ln 3$', 'গ. $\\ln 2$', 'ঘ. $1$', 'ঙ. $0$'],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 10,
+    question: '$\\int \\frac{e^x(1+\\sin x)}{1+\\cos x} dx$ এর মান কোনটি?',
+    options: [
+      'ক. $e^x \\cos(\\frac{x}{2}) + c$',
+      'খ. $e^x \\sin(\\frac{x}{2}) + c$',
+      'গ. $e^x \\tan(\\frac{x}{2}) + c$',
+      'ঘ. $e^x \\cot(\\frac{x}{2}) + c$',
+    ],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 11,
+    question: '$\\int_0^{\\frac{\\pi}{3}} \\frac{\\cos x dx}{\\sqrt{4-\\sin^2 x}}$ কত?',
+    options: ['ক. $\\frac{\\pi}{3}$', 'খ. $\\frac{\\pi}{6}$', 'গ. $\\frac{\\pi}{2}$', 'ঘ. $\\pi$'],
+    answer: null, // You'll need to determine the correct answer
+  },
+  {
+    number: 12,
+    question:
+      '$F(x) = \\int_0^x \\frac{t-3}{t^2+7} dt$ হলে $x$ এর কোন মানের জন্য $F(x)$ ন্যূনতম হবে?',
+    options: ['ক. $0$', 'খ. $3$', 'গ. $\\sqrt{7}$', 'ঘ. $-\\sqrt{7}$'],
+    answer: null, // You'll need to determine the correct answer
+  },
+];
+
 
     let currentQuestion = 0;
     let score = 0;
