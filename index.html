@@ -9,9 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
   
   <script>
     (function () {
@@ -164,31 +176,6 @@
       <div id="options"></div>
       <div class="navigation">
         <button id="prevBtn" onclick="prevQuestion()">পূর্ববর্তী</button>
-         <p>
-    Evaluate the integral:  
-    $$\int_{4}^{5} x^2 \, dx$$
-  </p>
-
-  <p id="result"></p>
-
-  <script>
-    function f(x) {
-      return x * x;
-    }
-
-    function integrate(f, a, b, n) {
-      const h = (b - a) / n;
-      let sum = 0.5 * (f(a) + f(b));
-      for (let i = 1; i < n; i++) {
-        sum += f(a + i * h);
-      }
-      return sum * h;
-    }
-
-    const result = integrate(f, 4, 5, 1000);
-    document.getElementById("result").innerHTML = 
-      `Result: $$\\int_{4}^{5} x^2 \\, dx \\approx ${result.toFixed(5)}$$`;
-  </script>
         <button id="nextBtn" onclick="nextQuestion()">পরবর্তী</button>
       </div>
     </div>
@@ -203,7 +190,7 @@
 const quiz = [
   {
     number: 1,
-    question: `$$\\int_{4}^{5} x^2 \\, dx এর মান কোনটি?`,
+    question: `$$\\int_{4}^{5} x^2 \\, dx$$ এর মান কোনটি?`,
     options: [
       'ক. $\\frac{1}{2} f(pp)$',
       'খ. $\\frac{1}{3} f(p)$',
@@ -250,7 +237,7 @@ const quiz = [
       const lastExamTime = localStorage.getItem("examCompletedTime");
       if (lastExamTime) {
         const elapsedTime = Date.now() - parseInt(lastExamTime, 10);
-        const oneHour = 1 * 60 * 1000;
+        const oneHour = 2 * 60 * 1000;
         if (elapsedTime < oneHour) {
           document.querySelector(".container").innerHTML = `
             <div class="result">
