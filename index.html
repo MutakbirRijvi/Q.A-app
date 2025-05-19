@@ -293,7 +293,7 @@ const quiz = [
 
     function showQuestion() {
       const q = quiz[currentQuestion];
-      document.getElementById('question').innerText = `প্রশ্ন ${currentQuestion + 1}: ${q.question}`;
+      document.getElementById('question').innerHTML = `প্রশ্ন ${currentQuestion + 1}: ${q.question}`;
       const optionsDiv = document.getElementById('options');
       optionsDiv.innerHTML = '';
       q.options.forEach((opt, idx) => {
