@@ -152,6 +152,9 @@
     <div id="nameInputSection">
       <h3>পরীক্ষার্থীর নাম লিখুন:</h3>
       <input type="text" id="examinerName" placeholder="আপনার নাম লিখুন">
+      <script>
+        document.getElementById("examinerName").innerHTML = 
+      `Result: $$\\int_{4}^{5} x^2 \\, dx$$`; </script>
       <button onclick="saveName()">পরীক্ষা শুরু করুন</button>
     </div>
 
@@ -171,8 +174,7 @@
   </div>
 
   <script>
-    document.getElementById("result").innerHTML = 
-      `Result: $$\\int_{4}^{5} x^2 \\, dx$$`;
+    
 const quiz = [
   {
     number: 1,
