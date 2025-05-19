@@ -373,6 +373,7 @@ const quiz = [
 
       document.getElementById('prevBtn').disabled = currentQuestion === 0;
       document.getElementById('nextBtn').innerText = currentQuestion === quiz.length - 1 ? 'জমা দিন' : 'পরবর্তী';
+      MathJax.typesetPromise();
     }
 
     function nextQuestion() {
