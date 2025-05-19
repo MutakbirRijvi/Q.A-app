@@ -164,6 +164,31 @@
       <div id="options"></div>
       <div class="navigation">
         <button id="prevBtn" onclick="prevQuestion()">পূর্ববর্তী</button>
+         <p>
+    Evaluate the integral:  
+    $$\int_{4}^{5} x^2 \, dx$$
+  </p>
+
+  <p id="result"></p>
+
+  <script>
+    function f(x) {
+      return x * x;
+    }
+
+    function integrate(f, a, b, n) {
+      const h = (b - a) / n;
+      let sum = 0.5 * (f(a) + f(b));
+      for (let i = 1; i < n; i++) {
+        sum += f(a + i * h);
+      }
+      return sum * h;
+    }
+
+    const result = integrate(f, 4, 5, 1000);
+    document.getElementById("result").innerHTML = 
+      `Result: $$\\int_{4}^{5} x^2 \\, dx \\approx ${result.toFixed(5)}$$`;
+  </script
         <button id="nextBtn" onclick="nextQuestion()">পরবর্তী</button>
       </div>
     </div>
