@@ -291,21 +291,23 @@ const quiz = [
       timeRemaining--;
     }
 
-    function showQuestion() {
-      const q = quiz[currentQuestion];
-      document.getElementById('question').innerHTML = `প্রশ্ন ${currentQuestion + 1}: ${q.question}`;
-      const optionsDiv = document.getElementById('options');
-      optionsDiv.innerHTML = '';
-      q.options.forEach((opt, idx) => {
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="radio" name="option" value="${idx}" ${selectedAnswers[currentQuestion] === idx ? 'checked' : ''}> ${opt}`;
-        optionsDiv.appendChild(label);
-      });
-
-      document.getElementById('prevBtn').disabled = currentQuestion === 0;
-      document.getElementById('nextBtn').innerText = currentQuestion === quiz.length - 1 ? 'জমা দিন' : 'পরবর্তী';
-      MathJax.typesetPromise();
-    }
+      function showQuestion() {
+        const q = quiz[currentQuestion];
+        document.getElementById('question').innerHTML = `প্রশ্ন ${currentQuestion + 1}: ${q.question}`;
+        const optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="radio" name="option" value="${idx}" ${selectedAnswers[currentQuestion] === idx ? 'checked' : ''}> ${opt}`;
+          optionsDiv.appendChild(label);
+        });
+      
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        document.getElementById('nextBtn').innerText = currentQuestion === quiz.length - 1 ? 'জমা দিন' : 'পরবর্তী';
+      
+        // Trigger MathJax to typeset the new content
+        MathJax.typesetPromise();
+      }
 
     function nextQuestion() {
       const selectedOption = document.querySelector('input[name="option"]:checked');
