@@ -584,34 +584,68 @@ function showQuestion() {
       }
     }
 
-    function submitExam() {
-      clearInterval(timerInterval);
-      score = selectedAnswers.reduce((acc, curr, idx) => curr === quiz[idx].answer ? acc + 1 : acc, 0);
+function submitExam() {
+  if (localStorage.getItem('examCompleted')) return; // Prevent multiple calls
 
-      document.querySelector('.result').style.display = 'flex';
-      document.getElementById('score').innerText = `${examinerName} - ফলাফল: ${score} / ${quiz.length}`;
-      document.querySelector('.navigation').style.display = 'none';
-      document.getElementById('question').style.display = 'none';
-      document.getElementById('options').style.display = 'none';
+  clearInterval(timerInterval);
+  score = selectedAnswers.reduce((acc, curr, idx) => curr === quiz[idx].answer ? acc + 1 : acc, 0);
 
-      localStorage.setItem('examCompleted', true);
-      localStorage.setItem('examCompletedTime', Date.now().toString());
+  document.querySelector('.result').style.display = 'flex';
+  document.getElementById('score').innerText = `${examinerName} - ফলাফল: ${score} / ${quiz.length}`;
+  document.querySelector('.navigation').style.display = 'none';
+  document.getElementById('question').style.display = 'none';
+  document.getElementById('options').style.display = 'none';
 
-      // Optional: Enable EmailJS
-      
-       emailjs.send("service_bqhs75j", "template_o3dw98v", {
-         name: examinerName,
-         score: `${score}/${quiz.length}`,
-         time: new Date().toLocaleString()
-       })
-       .then(() => {
-        alert('স্কোর সফলভাবে ইমেইল করা হয়েছে।');
-       }, (error) => {
-         alert('ইমেইল পাঠাতে ব্যর্থ হয়েছে।');
-         console.error('Email error:', error);
-       });
-      
-    }
+  localStorage.setItem('examCompleted', true);
+  localStorage.setItem('examCompletedTime', Date.now().toString());
+
+  emailjs.send("service_bqhs75j", "template_o3dw98v", {
+    name: examinerName,
+    score: `${score}/${quiz.length}`,
+    time: new Date().toLocaleString()
+  }).then(() => {
+    alert('স্কোর সফলভাবে ইমেইল করা হয়েছে।');
+  }, (error) => {
+    alert('ইমেইল পাঠাতে ব্যর্থ হয়েছে।');
+    console.error('Email error:', error);
+  });
+}
+
+
+let examAutoSubmitted = false;
+
+function autoSubmitWithAlert(reason) {
+  if (!examAutoSubmitted && !localStorage.getItem('examCompleted')) {
+    examAutoSubmitted = true;
+    alert(reason);
+    submitExam();
+  }
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    autoSubmitWithAlert("আপনি ট্যাব পরিবর্তন করেছেন, পরীক্ষা জমা দেয়া হবে।");
+  }
+});
+
+window.addEventListener("blur", () => {
+  autoSubmitWithAlert("আপনি অন্য অ্যাপ বা ট্যাবে চলে গেছেন, পরীক্ষা জমা দেয়া হবে।");
+});
+
+
+    // Disable right click, inspect, etc.
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("selectstart", e => e.preventDefault());
+    document.onkeydown = function (e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && ["u", "s", "c", "i", "j"].includes(e.key.toLowerCase())) ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i")
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    };
   </script>
 </body>
 </html>
