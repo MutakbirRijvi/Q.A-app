@@ -599,17 +599,17 @@ function showQuestion() {
 
       // Optional: Enable EmailJS
       
-      // emailjs.send("service_bqhs75j", "template_o3dw98v", {
-      //   name: examinerName,
-      //   score: `${score}/${quiz.length}`,
-      //   time: new Date().toLocaleString()
-      // })
-      // .then(() => {
-      //   alert('স্কোর সফলভাবে ইমেইল করা হয়েছে।');
-      // }, (error) => {
-      //   alert('ইমেইল পাঠাতে ব্যর্থ হয়েছে।');
-      //   console.error('Email error:', error);
-      // });
+       emailjs.send("service_bqhs75j", "template_o3dw98v", {
+         name: examinerName,
+         score: `${score}/${quiz.length}`,
+         time: new Date().toLocaleString()
+       })
+       .then(() => {
+        alert('স্কোর সফলভাবে ইমেইল করা হয়েছে।');
+       }, (error) => {
+         alert('ইমেইল পাঠাতে ব্যর্থ হয়েছে।');
+         console.error('Email error:', error);
+       });
       
     }
   </script>
