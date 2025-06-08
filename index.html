@@ -498,7 +498,7 @@ const quiz = [
       const lastExamTime = localStorage.getItem("examCompletedTime");
       if (lastExamTime) {
         const elapsedTime = Date.now() - parseInt(lastExamTime, 10);
-        const oneHour = 60 * 60 * 1000;
+        const oneHour = 1 * 60 * 1000;
         if (elapsedTime < oneHour) {
           document.querySelector(".container").innerHTML = `
             <div class="result">
