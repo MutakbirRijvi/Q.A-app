@@ -190,16 +190,16 @@
     
 const quiz = [
   {
-    number: 1,
-    question: '$$\\int_{4}^{5} x^2 \\,dx$$ এর মান কোনটি?',
-    options: [
-      'ক. $\\frac{89}{3}$',
-      'খ. $\\frac{61}{3}$',
-      'গ. $\\frac{161}{3}$',
-      'ঘ. $\\frac{169}{3}$',
-    ],
-    answer: 'খ. $\\frac{61}{3}$',
-  },
+  number: 1,
+  question: '$$\\int_{4}^{5} \\ lnx \\,dx$$ এর মান কোনটি?',
+  options: [
+    'ক. $5 \\ln5 - 4 \\ln4 - 1$',
+    'খ. $5 \\ln5 - 5 \\ln4$',
+    'গ. $\\frac{369}{4}$',
+    'ঘ. $\\ln(\\frac{5}{4})$',
+  ],
+  answer: 'ক. $5 \\ln 5 - 4 \\ln 4 - 1$',
+},
   {
     number: 2,
     question: '$y^2 = 16x$ এবং $y = 4x$ দ্বারা আবদ্ধ ক্ষেত্রের ক্ষেত্রফল কোনটি?',
@@ -209,20 +209,279 @@ const quiz = [
       'গ. $\\frac{1}{6}$ বর্গ একক',
       'ঘ. $\\frac{1}{12}$ বর্গ একক',
     ],
-    answer: 'ঘ. $\\frac{1}{12}$ বর্গ একক',
+    answer: 'খ. $\\frac{2}{3}$ বর্গ একক',
   },
-  // Repeat the next 23 items with serial numbers from 3 to 25
-  ...Array.from({ length: 23 }, (_, i) => ({
-    number: i + 3,
-    question: '$\\frac{d}{dx} e^{f(x)} = f\'(x) + c$ হলে $f(x) = ?$',
+  {
+
+    number: 3,
+    question: '$$\\int \\frac{1}{1 + x^2} \\, dx$$ এর সমাধান কোনটি?',
     options: [
-      'ক. $\\sin(xe^x)$',
-      'খ. $\\tan(xe^x)$',
-      'গ. $\\cot(xe^x)$',
-      'ঘ. $\\sec(xe^x)$',
+      'ক. $\\tan^{-1}x + C$',
+      'খ. $\\cot^{-1}x + C$',
+      'গ. $\\ln|1+x^2| + C$',
+      'ঘ. $\\sec^{-1}x + C$',
     ],
-    answer: 'ঘ. $\\sec(xe^x)$',
-  })),
+    answer: 'ক. $\\tan^{-1}x + C$',
+  },
+{
+  number: 4,
+  question: '$$\\frac{d}{dx}(e^{\\sin 2x})$$ এর মান কোনটি?',
+  options: [
+    'ক. $2\\cos 2x \\cdot e^{\\sin 2x}$',
+    'খ. $2\\sin 2x \\cdot e^{\\sin 2x}$',
+    'গ. $2e^{2x}$',
+    'ঘ. $e^{x^2}$',
+  ],
+  answer: 'ক. $2\\cos 2x \\cdot e^{\\sin 2x}$',
+},
+{
+  number: 5,
+  question: '$$\\int_{3}^{2} (3x^2 + 2x + 1) \\, dx$$ এর ফলাফল কোনটি?',
+  options: [
+    'ক. $-25$',
+    'খ. $25$',
+    'গ. $-14$',
+    'ঘ. $39$',
+  ],
+  answer: 'ক. $-25$',
+},
+
+{
+  number: 6,
+  question: '$$\\begin{bmatrix} 2 & 3 \\\\ 4 & 5 \\end{bmatrix} + \\begin{bmatrix} 1 & 0 \\\\ -1 & 2 \\end{bmatrix}$$ এর ফলাফল কোনটি?',
+  options: [
+    'ক. $\\begin{bmatrix} 3 & 3 \\\\ 3 & 7 \\end{bmatrix}$',
+    'খ. $\\begin{bmatrix} 1 & 3 \\\\ 3 & 3 \\end{bmatrix}$',
+    'গ. $\\begin{bmatrix} 3 & 3 \\\\ 5 & 7 \\end{bmatrix}$',
+    'ঘ. $\\begin{bmatrix} 2 & 3 \\\\ 5 & 3 \\end{bmatrix}$',
+  ],
+  answer: 'ক. $\\begin{bmatrix} 3 & 3 \\\\ 3 & 7 \\end{bmatrix}$',
+},
+
+{
+  number: 7,
+  question: '$$\\text{det} \\left( \\begin{bmatrix} 3 & 2 \\\\ 5 & 4 \\end{bmatrix} \\right)$$ এর মান কত?',
+  options: [
+    'ক. $7$',
+    'খ. $-2$',
+    'গ. $2$',
+    'ঘ. $-7$',
+  ],
+  answer: 'ঘ. $-7$',
+},
+
+{
+  number: 8,
+  question: 'একটি ম্যাট্রিক্স $$A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$$ হলে $$A^{-1}$$ এর সূত্র কী?',
+  options: [
+    'ক. $\\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}$',
+    'খ. $\\frac{1}{ab-cd} \\begin{bmatrix} -d & b \\\\ c & -a \\end{bmatrix}$',
+    'গ. $\\frac{1}{ab+cd} \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$',
+    'ঘ. $\\begin{bmatrix} a & -b \\\\ -c & d \\end{bmatrix}$',
+  ],
+  answer: 'ক. $\\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}$',
+},
+
+{
+  number: 9,
+  question: '$$\\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix}^2$$ এর মান কত?',
+  options: [
+    'ক. $\\begin{bmatrix} 1 & 4 \\\\ 0 & 1 \\end{bmatrix}$',
+    'খ. $\\begin{bmatrix} 1 & 2 \\\\ 0 & 2 \\end{bmatrix}$',
+    'গ. $\\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix}$',
+    'ঘ. $\\begin{bmatrix} 1 & 3 \\\\ 0 & 1 \\end{bmatrix}$',
+  ],
+  answer: 'ক. $\\begin{bmatrix} 1 & 4 \\\\ 0 & 1 \\end{bmatrix}$',
+},
+
+{
+  number: 10,
+  question: 'যদি $$A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}, B = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$$ হয়, তবে $$AB$$ এর মান কত?',
+  options: [
+    'ক. $\\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$',
+    'খ. $\\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$',
+    'গ. $\\begin{bmatrix} 2 & 1 \\\\ 3 & 4 \\end{bmatrix}$',
+    'ঘ. $\\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$',
+  ],
+  answer: 'ক. $\\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$',
+}
+,
+{
+  number: 11,
+  question: 'রেখা $$3x - 4y + 5 = 0$$ এর এবং বিন্দু $$P(1,2)$$ থেকে দৈর্ঘ্য কত?',
+  options: [
+    'ক. $\\frac{11}{5}$',
+    'খ. $\\frac{7}{5}$',
+    'গ. $\\frac{3}{5}$',
+    'ঘ. $\\frac{9}{5}$',
+  ],
+  answer: 'খ. $\\frac{7}{5}$',
+},
+
+{
+  number: 12,
+  question: 'বৃত্ত $$x^2 + y^2 - 4x + 6y - 12 = 0$$ এর কেন্দ্র এবং ব্যাসার্ধ নির্ণয় করো।',
+  options: [
+    'ক. কেন্দ্র $(2, -3)$, ব্যাসার্ধ 5',
+    'খ. কেন্দ্র $(2, -3)$, ব্যাসার্ধ 4',
+    'গ. কেন্দ্র $(-2, 3)$, ব্যাসার্ধ 5',
+    'ঘ. কেন্দ্র $(-2, 3)$, ব্যাসার্ধ 4',
+  ],
+  answer: 'ক. কেন্দ্র $(2, -3)$, ব্যাসার্ধ 5',
+},
+
+{
+  number: 13,
+  question: 'রেখার সমীকরণ $$2x - 3y + 7 = 0$$ এবং $$4x - 6y + k = 0$$ সমান্তরাল হলে $k$ এর মান কত?',
+  options: [
+    'ক. 14',
+    'খ. $-14$',
+    'গ. 7',
+    'ঘ. $-7$',
+  ],
+  answer: 'খ. $-14$',
+},
+
+{
+  number: 14,
+  question: 'বৃত্ত $$x^2 + y^2 = 25$$ এর উপর $$y = mx + c$$ রেখাটি স্পর্শক হলে $c$ এর মান কি?',
+  options: [
+    'ক. $\\pm 5\\sqrt{1 + m^2}$',
+    'খ. $\\pm 25\\sqrt{1 + m^2}$',
+    'গ. $\\pm 5(1+m^2)$',
+    'ঘ. $\\pm \\sqrt{1 + m^2}$',
+  ],
+  answer: 'ক. $\\pm 5\\sqrt{1 + m^2}$',
+},
+
+{
+  number: 15,
+  question: 'বৃত্তের সমীকরণ $$x^2 + y^2 - 6x + 8y + 9 = 0$$ এর কেন্দ্র এবং ব্যাসার্ধ কত?',
+  options: [
+    'ক. কেন্দ্র $(3, -4)$, ব্যাসার্ধ 4',
+    'খ. কেন্দ্র $(-3, 4)$, ব্যাসার্ধ 4',
+    'গ. কেন্দ্র $(3, -4)$, ব্যাসার্ধ 2',
+    'ঘ. কেন্দ্র $(-3, 4)$, ব্যাসার্ধ 2',
+  ],
+  answer: 'ক. কেন্দ্র $(3, -4)$, ব্যাসার্ধ 4',
+},
+
+{
+  number: 16,
+  question: 'রেখা $$x - 2y + 3 = 0$$ এবং $$3x + ky = 7$$ এর ছেদবিন্দুর মাধ্যমে $k$ এর মান নির্ণয় করো যদি ছেদবিন্দুটি $x$ অক্ষের উপর থাকে।',
+  options: [
+    'ক. $-6$',
+    'খ. $6$',
+    'গ. $3$',
+    'ঘ. $-3$',
+  ],
+  answer: 'খ. $6$',
+},
+
+{
+  number: 17,
+  question: 'বৃত্ত $$x^2 + y^2 - 4x - 6y + 9 = 0$$ এবং রেখা $$3x + 4y = 24$$ এর দূরত্ব কত?',
+  options: [
+    'ক. 7',
+    'খ. 5',
+    'গ. 3',
+    'ঘ. 4',
+  ],
+  answer: 'গ. 3',
+},
+
+{
+  number: 18,
+  question: 'রেখা $$y = mx + c$$ বৃত্ত $$x^2 + y^2 = 1$$ এর স্পর্শক হলে $c$ এর মানের শর্ত কী?',
+  options: [
+    'ক. $c^2 = 1 + m^2$',
+    'খ. $c^2 = 1 - m^2$',
+    'গ. $c^2 = m^2 - 1$',
+    'ঘ. $c = m$',
+  ],
+  answer: 'ক. $c^2 = 1 + m^2$',
+},
+
+{
+  number: 19,
+  question: 'বৃত্ত $$x^2 + y^2 = 16$$ এর কেন্দ্র থেকে বিন্দু $$P(6, 4)$$ এর দূরত্ব কত?',
+  options: [
+    'ক. 10',
+    'খ. 8',
+    'গ. 5',
+    'ঘ. 12',
+  ],
+  answer: 'ক. 10',
+},
+
+{
+  number: 20,
+  question: 'দুটি রেখা $$2x + y - 1 = 0$$ এবং $$4x + 2y + k = 0$$ পরস্পর লম্ব হলে $k$ এর মান কত?',
+  options: [
+    'ক. 2',
+    'খ. $-2$',
+    'গ. 0',
+    'ঘ. $-1$',
+  ],
+  answer: 'গ. 0',
+},
+{
+  number: 21,
+  question: ' যদি $$\\   \\sin\\theta + \\cos\\theta = \\frac{5}{4},$$  তবে  $$sin 2\\theta = ?$$',
+  options: [
+    'ক. $\\frac{7}{8}$',
+    'খ. $\\frac{3}{4}$',
+    'গ. $\\frac{9}{16}$',
+    'ঘ. $\\frac{1}{2}$',
+  ],
+  answer: 'গ. $\\frac{15}{16}$',
+},
+
+{
+  number: 22,
+  question: '$$tan A = 2,$$ তবে $$ \\tan2A + \\sin2A = ?$$', 
+  options: [
+    'ক. $-\\frac{7}{8}$',
+    'খ. $\\frac{4}{3}$',
+    'গ. $-\\frac{8}{15}$',
+    'ঘ. $\\frac{1}{2}$',
+  ],
+  answer: 'গ. $-\\frac{8}{15}$',
+},
+
+{
+  number: 23,
+  question: '$$\\ a = 7, b = 9, c = 10 $$ হলে $$ cos C = ?$$',
+  options: [
+    'ক. $\\frac{1}{10}$',
+    'খ. $\\frac{7}{9}$',
+    'গ. $\\frac{17}{45}$',
+    'ঘ. $\\frac{9}{14}$',
+  ],
+  answer: 'গ. $\\frac{17}{45}$',
+},
+{
+  number: 24,
+  question: '$$\\frac{d}{dx}\\left(e^{x^2 \\sin x}\\right)$$ এর মান কোনটি?',
+  options: [
+    'ক. $e^{x^2\\sin x} (2x\\sin x + x^2\\cos x)$',
+    'খ. $e^{x^2\\sin x} (\\sin x + \\cos x)$',
+    'গ. $2x\\cos x + x^2\\sin x$',
+    'ঘ. $e^{x^2\\sin x} (2x\\cos x + x^2\\sin x)$',
+  ],
+  answer: 'ক. $e^{x^2\\sin x} (2x\\sin x + x^2\\cos x)$',
+},
+{
+  number: 25,
+  question: '$$\\frac{d}{dx}\\left(x^x\\right)$$ এর মান কোনটি?',
+  options: [
+    'ক. $x^x(1 + \\ln x)$',
+    'খ. $x^{x-1}$',
+    'গ. $x^x \\ln x$',
+    'ঘ. $x^x(\\ln x - 1)$',
+  ],
+  answer: 'ক. $x^x(1 + \\ln x)$',
+}
 ];
 
 
