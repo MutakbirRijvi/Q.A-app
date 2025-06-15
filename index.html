@@ -1292,7 +1292,7 @@ const quiz = [
       'গ. $25$ জুল',
       'ঘ. $98$ জুল',
     ],
-    answer: 'খ. $490$ জুল',
+    answer: 'ক. $245$ জুল',
   },
   {
     number: 22,
@@ -1307,7 +1307,7 @@ const quiz = [
   },
   {
     number: 23,
-    question: 'একটি মোটর প্রতি সেকেন্ডে $2000$ জুল কাজ করতে পারে এবং একটি $500\\,kg$ বস্তুকে $10$ সেকেন্ডে $20$ মিটার উচ্চতায় উত্তোলন করে। এই কাজ করতে মোটরের দক্ষতা কত? ($g = 10\\,m/s^2$ ধরা হোক)',
+    question: 'একটি মোটর প্রতি সেকেন্ডে $12500$ জুল কাজ করতে পারে এবং একটি $500\\,kg$ বস্তুকে $10$ সেকেন্ডে $20$ মিটার উচ্চতায় উত্তোলন করে। এই কাজ করতে মোটরের দক্ষতা কত? ($g = 10\\,m/s^2$ ধরা হোক)',
     options: [
       'ক. $75\\%$',
       'খ. $80\\%$',
@@ -1321,12 +1321,12 @@ const quiz = [
     number: 24,
     question: 'আপেক্ষিক আদ্রতা নির্ণয়ের সূত্র কোনটি?',
     options: [
-      'ক. $\\text{RH} = \\frac{e}{E} \\times 100\\%$',
-      'খ. $\\text{RH} = \\frac{E}{e} \\times 100\\%$',
-      'গ. $\\text{RH} = e \\times E$',
+      'ক. $\\text{RH} = \\frac{f}{F} \\times 100\\%$',
+      'খ. $\\text{RH} = \\frac{F}{f} \\times 100\\%$',
+      'গ. $\\text{RH} = f \\times F$',
       'ঘ. $\\text{RH} = \\frac{T}{P}$',
     ],
-    answer: 'ক. $\\text{RH} = \\frac{e}{E} \\times 100\\%$',
+    answer: 'ক. $\\text{RH} = \\frac{f}{F} \\times 100\\%$',
   },
 
   {
@@ -1359,7 +1359,7 @@ const quiz = [
       const lastExamTime = localStorage.getItem("examCompletedTime");
       if (lastExamTime) {
         const elapsedTime = Date.now() - parseInt(lastExamTime, 10);
-        const oneHour = 60 * 60 * 1000;
+        const oneHour = 2 * 60 * 1000;
         if (elapsedTime < oneHour) {
           document.querySelector(".container").innerHTML = `
             <div class="result">
