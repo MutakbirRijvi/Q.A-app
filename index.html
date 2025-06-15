@@ -181,8 +181,10 @@
       </div>
     </div>
 
-    <div class="result" style="display:none;">
+    <div class="result" style="display: none; flex-direction: column;">
       <h2 id="score"></h2>
+      
+      <div id="detailedAnswers" style="white-space: pre-wrap; font-family: monospace; margin-top: 20px; background: #f9f9f9; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></div>
     </div>
   </div>
 
@@ -1446,19 +1448,49 @@ function showQuestion() {
     }
 
 function submitExam() {
-  if (localStorage.getItem('examCompleted')) return; // Prevent multiple calls
+  if (localStorage.getItem('examCompleted')) return;
 
   clearInterval(timerInterval);
-  score = selectedAnswers.reduce((acc, curr, idx) => curr === quiz[idx].answer ? acc + 1 : acc, 0);
 
+  // Calculate score
+  const score = selectedAnswers.reduce((acc, curr, idx) =>
+    curr === quiz[idx].answer ? acc + 1 : acc, 0
+  );
+
+  // Construct detailed results string with questions, correct answers, and user selections
+  let detailedResultsUI = quiz.map((q, i) => {
+    return `প্রশ্ন ${q.number}:\n${q.question}\n✅ সঠিক উত্তর: ${q.answer}\n📝 নির্বাচিত উত্তর: ${selectedAnswers[i] || 'উত্তর দেওয়া হয়নি'}\n`;
+  }).join('\n-----------------------------\n');
+
+  // Show result container
   document.querySelector('.result').style.display = 'flex';
+
+  // Display score
   document.getElementById('score').innerText = `${examinerName} - ফলাফল: ${score} / ${quiz.length}`;
+
+  // Hide question navigation and options
   document.querySelector('.navigation').style.display = 'none';
   document.getElementById('question').style.display = 'none';
   document.getElementById('options').style.display = 'none';
 
+  // Show detailed answers with line breaks
+  const detailedAnswersEl = document.getElementById('detailedAnswers');
+  detailedAnswersEl.innerHTML = detailedResultsUI.replace(/\n/g, '<br>');
+
+  // Render MathJax for any math expressions
+  if (window.MathJax) {
+    MathJax.typesetPromise();
+  }
+
+  // Save exam completion status
   localStorage.setItem('examCompleted', true);
   localStorage.setItem('examCompletedTime', Date.now().toString());
+
+  // Prepare short selected options for email (optional)
+  let detailedResultsEmail = quiz.slice(0, 10).map((q, i) => {
+    const selected = selectedAnswers[i];
+    return `প্রশ্ন ${q.number}: ${selected ? selected.charAt(0) : 'উত্তর দেওয়া হয়নি'}`;
+  }).join(', ');
 
   emailjs.send("service_bqhs75j", "template_o3dw98v", {
     name: examinerName,
